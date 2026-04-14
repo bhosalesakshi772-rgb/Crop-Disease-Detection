@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}{{ disease }} Detection Result{% endblock %}
+
+{% block content %}
+<div class="row g-5">
+    <!-- Detected Image -->
+    <div class="col-lg-6">
+        <div class="card shadow-lg border-0 h-100">
+            <div class="card-header bg-success text-white text-center py-4">
+                <h3 class="mb-0"><i class="fas fa-image me-3"></i>Uploaded Image</h3>
+            </div>
+            <div class="card-body p-0">
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" 
+                    class="card-img-top" style="height: 400px; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Prediction Result -->
+    <div class="col-lg-6">
+        <div class="card shadow-lg border-0 h-100">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <h2 class="mb-1 fw-bold">
+                    <i class="fas fa-chart-line me-2"></i>Prediction Result
+                </h2>
+                <div class="h2 text-warning mb-0">{{ confidence|round(2) }}% Confidence</div>
+            </div>
+            <div class="disease-badge mb-4 p-3 rounded-4 text-center"
+     style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+
+    <h3 style="
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        font-size: 24px;
+        line-height: 1.4;
+        margin: 0;
+    ">
+        {{ disease }}
+    </h3>
+
+</div>
+                
+                <div class="progress mb-4 mx-auto" style="height: 20px; width: 80%;">
+                    <div class="progress-bar bg-success" role="progressbar" 
+                         style="width: {{ confidence }}%" aria-valuenow="{{ confidence }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ confidence|round(1) }}%
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-lightbulb me-2 text-warning"></i>Treatment Recommendation</h5>
+                    <p class="mb-0 lead">{{ treatment }}</p>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('upload') }}" class="btn btn-success btn-lg px-5 me-3">
+                        <i class="fas fa-upload me-2"></i>Analyze Another
+                    </a>
+                    <a href="{{ url_for('history') }}" class="btn btn-outline-primary btn-lg px-5">
+                        <i class="fas fa-history me-2"></i>View History
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h5 class="card-title"><i class="fas fa-info-circle me-2 text-primary"></i>Prediction Details</h5>
+                <div class="row text-start">
+                    <div class="col-md-4">
+                        <strong>Filename:</strong><br>
+                        <code class="small">{{ filename }}</code>
+                    </div>
+                    <div class="mb-4 p-4 rounded-4 shadow-sm" 
+     style="background: #f8fafc;">
+    <h2 class="fw-bold text-success mb-2">{{ disease }}</h2>
+    <p class="text-muted mb-0">Detected Crop Disease</p>
+</div>
+                    <div class="col-md-4">
+                        <strong>Confidence:</strong><br>
+                        <span class="h5 text-success">{{ confidence|round(2) }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Crop Disease Detection Web App
 
 ## Setup
@@ -25,3 +26,6 @@ CREATE TABLE predictions (
 ## Dataset
 Download PlantVillage dataset from Kaggle: https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset
 Extract to `dataset/plantvillage_dataset/`
+=======
+# Crop-Disease-Detection
+>>>>>>> dd1c27dfc4a0b6dea3a63c4ed2b3c02579c14877
